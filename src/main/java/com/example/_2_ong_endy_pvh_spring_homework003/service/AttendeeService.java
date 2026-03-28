@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface AttendeeService {
     List<Attendee> getAllAttendees(int page, int size);
+
+    Attendee getAttendeeById(Long attendeeId);
+
+    Attendee deleteAttendeeById(Long attendeeId);
 }

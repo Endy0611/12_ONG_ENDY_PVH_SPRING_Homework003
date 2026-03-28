@@ -1,10 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -22,4 +19,17 @@ public interface AttendeeRepository {
 
 
     List<Attendee> getAllAttendees(int offset, int size);
+
+
+    @ResultMap("attendeeMapper")
+    @Select("""
+        SELECT * FROM attendees WHERE attendee_id = #{attendeeId}
+    """)
+    Attendee getAttendeeById(Long attendeeId);
+
+    @ResultMap("attendeeMapper")
+    @Select("""
+        DELETE FROM attendees WHERE attendee_id = #{attendeeId} RETURNING NULL
+    """)
+    Attendee deleteAttendeeById(Long attendeeId);
 }

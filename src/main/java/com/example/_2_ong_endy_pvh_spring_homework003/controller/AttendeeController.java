@@ -6,10 +6,7 @@ import com.example._2_ong_endy_pvh_spring_homework003.service.AttendeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.List;
@@ -30,6 +27,27 @@ public class AttendeeController {
                 .payload(attendeeService.getAllAttendees(page, size))
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 
+    @GetMapping("/{attendee_id}")
+    public ResponseEntity<ApiResponse<Attendee>> getAttendeeById(@PathVariable("attendee_id") Long attendeeId) {
+        ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
+                .timestamp(Instant.now())
+                .message(String.format("Retrieved attendee with id #d successfully", attendeeId))
+                .status(HttpStatus.OK)
+                .payload(attendeeService.getAttendeeById(attendeeId))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{attendee_id}")
+    public ResponseEntity<ApiResponse<Attendee>> deleteAttendeeById(@PathVariable("attendee_id") Long attendeeId) {
+        ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
+                .timestamp(Instant.now())
+                .message(String.format("Retrieved attendee with id %d successfully", attendeeId))
+                .status(HttpStatus.OK)
+                .payload(attendeeService.deleteAttendeeById(attendeeId))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

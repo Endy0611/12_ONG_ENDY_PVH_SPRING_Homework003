@@ -19,4 +19,14 @@ public class AttendeeServiceImpl implements AttendeeService {
         int offset = size * (page-1);
         return attendeeRepository.getAllAttendees(offset, size);
     }
+
+    @Override
+    public Attendee getAttendeeById(Long attendeeId) {
+        return attendeeRepository.getAttendeeById(attendeeId);
+    }
+
+    @Override
+    public Attendee deleteAttendeeById(Long attendeeId) {
+        return attendeeRepository.deleteAttendeeById(attendeeId);
+    }
 }
