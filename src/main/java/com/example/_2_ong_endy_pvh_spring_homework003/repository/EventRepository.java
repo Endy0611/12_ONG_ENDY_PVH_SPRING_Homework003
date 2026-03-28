@@ -12,7 +12,8 @@ public interface EventRepository {
             @Result(property = "eventId", column = "event_id"),
             @Result(property = "eventName", column = "event_name"),
             @Result(property = "eventDate", column = "event_date"),
-            @Result(property = "venueId", column = "venue_id", one = @One(select = "com.example._2_ong_endy_pvh_spring_homework003.repository.VenueRepository.getVenueById")),
+            @Result(property = "attendee", column = "event_id", many = @Many (select = "com.example._2_ong_endy_pvh_spring_homework003.repository.EventAttendeeRepository.getAttendeeByEventId")),
+            @Result(property = "venue", column = "venue_id", one = @One (select = "com.example._2_ong_endy_pvh_spring_homework003.repository.VenueRepository.getVenueById"))
     })
     @Select("""
         SELECT * FROM events OFFSET #{offset} LIMIT #{size} 
