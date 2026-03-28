@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface EventService {
     List<Event> getAllEvents(int page, int size);
+
+    Event getEventById(Long eventId);
 }

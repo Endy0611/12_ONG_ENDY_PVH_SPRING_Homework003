@@ -18,4 +18,9 @@ public class EventServiceImpl implements EventService {
         int offset = size * (page-1);
         return eventRepository.getAllEvents(offset, size);
     }
+
+    @Override
+    public Event getEventById(Long eventId) {
+        return eventRepository.getEventById(eventId);
+    }
 }

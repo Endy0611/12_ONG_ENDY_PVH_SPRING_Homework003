@@ -6,10 +6,7 @@ import com.example._2_ong_endy_pvh_spring_homework003.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.List;
@@ -26,6 +23,17 @@ public class EventController {
                 .message("Retrieved events successfully")
                 .status(HttpStatus.OK)
                 .payload(eventService.getAllEvents(page, size))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/{event_id}")
+    public ResponseEntity<ApiResponse<Event>> getEventById(@PathVariable("event_id") Long eventId) {
+        ApiResponse<Event> apiResponse = ApiResponse.<Event>builder()
+                .timestamp(Instant.now())
+                .message("Retrieved events successfully")
+                .status(HttpStatus.OK)
+                .payload(eventService.getEventById(eventId))
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }

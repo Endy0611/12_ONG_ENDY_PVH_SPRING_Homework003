@@ -20,4 +20,9 @@ public interface EventAttendeeRepository {
     WHERE ea.event_id = #{eventId}
     """)
     List<Attendee> getAttendeeByEventId(Long eventId);
+
+    @Insert("""
+        INSERT INTO event_attendee VALUES (#{attendeeId}, #{eventId})
+    """)
+    void insertEventAttendee(Long attendeeId, Long eventId);
 }

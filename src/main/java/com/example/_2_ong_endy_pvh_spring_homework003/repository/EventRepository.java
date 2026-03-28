@@ -19,4 +19,10 @@ public interface EventRepository {
         SELECT * FROM events OFFSET #{offset} LIMIT #{size} 
     """)
     List<Event> getAllEvents(int offset, int size);
+
+    @ResultMap("eventMapper")
+    @Select("""
+        SELECT * FROM events WHERE event_id = #{eventId} 
+    """)
+    Event getEventById(Long eventId);
 }
