@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.EventRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.EventAttendeeRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.EventRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.service.EventService;
@@ -33,5 +34,14 @@ public class EventServiceImpl implements EventService {
         }
         eventAttendeeRepository.deleteEventAttendeeByEventId(eventId);
         return eventRepository.deleteEventById(eventId);
+    }
+
+    @Override
+    public Event saveEvent(EventRequest eventRequest) {
+        Event event = eventRepository.saveEvent(eventRequest);
+        for( Long AttendeeId : eventRequest.getAttendeeId()) {
+            eventAttendeeRepository.insertEventAttendee(AttendeeId, event.getEventId());
+        }
+        return eventRepository.getEventById(event.getEventId());
     }
 }

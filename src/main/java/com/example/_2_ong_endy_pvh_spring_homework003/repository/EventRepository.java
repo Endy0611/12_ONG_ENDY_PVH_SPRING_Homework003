@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.EventRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -31,4 +32,11 @@ public interface EventRepository {
         DELETE FROM events WHERE event_id = #{eventId} RETURNING NULL
     """)
     Event deleteEventById(Long eventId);
+
+
+    @ResultMap("eventMapper")
+    @Select("""
+        INSERT INTO events VALUES (default, #{req.eventName}, #{req.eventDate}, #{req.venueId}) RETURNING * 
+    """)
+    Event saveEvent(@Param("req") EventRequest eventRequest);
 }

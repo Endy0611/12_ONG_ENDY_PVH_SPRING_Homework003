@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.controller;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.EventRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.EventService;
 import lombok.RequiredArgsConstructor;
@@ -49,4 +50,14 @@ public class EventController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<ApiResponse<Event>> saveEvent(@RequestBody EventRequest eventRequest) {
+        ApiResponse<Event> apiResponse = ApiResponse.<Event>builder()
+                .timestamp(Instant.now())
+                .message("Created event successfully")
+                .status(HttpStatus.CREATED)
+                .payload(eventService.saveEvent(eventRequest))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
+    }
 }
