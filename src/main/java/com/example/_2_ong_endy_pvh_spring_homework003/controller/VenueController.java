@@ -5,7 +5,6 @@ import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.VenueService;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ import java.util.List;
 public class VenueController {
     private final VenueService venueService;
     @GetMapping
-    public ResponseEntity<ApiResponse<List<Venue>>> getAllVenues(@RequestParam int page, @RequestParam int size) {
+    public ResponseEntity<ApiResponse<List<Venue>>> getAllVenues(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
         ApiResponse<List<Venue>> apiResponse = ApiResponse.<List<Venue>>builder()
                 .timestamp(Instant.now())
                 .message("Retrieved venues successfully")
