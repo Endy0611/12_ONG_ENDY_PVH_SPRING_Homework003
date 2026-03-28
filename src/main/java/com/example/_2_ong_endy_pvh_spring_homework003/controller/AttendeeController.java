@@ -2,6 +2,7 @@ package com.example._2_ong_endy_pvh_spring_homework003.controller;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeUpdateRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.AttendeeService;
 import lombok.RequiredArgsConstructor;
@@ -65,12 +66,12 @@ public class AttendeeController {
     }
 
     @PutMapping("/{attendee_id}")
-    public ResponseEntity<ApiResponse<Attendee>> updateAttendeeById(@PathVariable("attendee_id") Long attendeeId, @RequestBody AttendeeRequest attendeeRequest) {
+    public ResponseEntity<ApiResponse<Attendee>> updateAttendeeById(@PathVariable("attendee_id") Long attendeeId, @RequestBody AttendeeUpdateRequest attendeeUpdateRequest) {
         ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
                 .timestamp(Instant.now())
                 .message("Updated attendee with id 7 successfully")
                 .status(HttpStatus.OK)
-                .payload(attendeeService.updateAttendeeById(attendeeId ,attendeeRequest))
+                .payload(attendeeService.updateAttendeeById(attendeeId ,attendeeUpdateRequest))
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }

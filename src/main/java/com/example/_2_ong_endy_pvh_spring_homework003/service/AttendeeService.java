@@ -2,6 +2,7 @@ package com.example._2_ong_endy_pvh_spring_homework003.service;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeUpdateRequest;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface AttendeeService {
 
     Attendee saveAttendee(AttendeeRequest attendeeRequest);
 
-    Attendee updateAttendeeById(Long attendeeId, AttendeeRequest attendeeRequest);
+    Attendee updateAttendeeById(Long attendeeId, AttendeeUpdateRequest attendeeUpdateRequest);
 }

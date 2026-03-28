@@ -2,6 +2,7 @@ package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeUpdateRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -44,7 +45,7 @@ public interface AttendeeRepository {
 
     @ResultMap("attendeeMapper")
     @Select("""
-        UPDATE attendees SET attendee_name = #{req.attendeeName}, email = #{req.email} WEHRE attendee = #{attendeeId}
+        UPDATE attendees SET attendee_name = #{req.attendeeName} WHERE attendee_id = #{attendeeId} RETURNING *
     """)
-    Attendee updateAttendeeById(Long attendeeId,@Param("req") AttendeeRequest attendeeRequest);
+    Attendee updateAttendeeById(Long attendeeId,@Param("req") AttendeeUpdateRequest attendeeUpdateRequest);
 }
