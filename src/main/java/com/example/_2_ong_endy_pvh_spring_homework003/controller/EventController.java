@@ -60,4 +60,15 @@ public class EventController {
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{event_id}")
+    public ResponseEntity<ApiResponse<Event>> updateEventById(@PathVariable("event_id") Long eventId,@RequestBody EventRequest eventRequest){
+        ApiResponse<Event> apiResponse = ApiResponse.<Event>builder()
+                .timestamp(Instant.now())
+                .message("Created event successfully")
+                .status(HttpStatus.OK)
+                .payload(eventService.updateEventById(eventId,eventRequest))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }

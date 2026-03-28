@@ -39,4 +39,11 @@ public interface EventRepository {
         INSERT INTO events VALUES (default, #{req.eventName}, #{req.eventDate}, #{req.venueId}) RETURNING * 
     """)
     Event saveEvent(@Param("req") EventRequest eventRequest);
+
+
+    @ResultMap("eventMapper")
+    @Select("""
+        UPDATE events SET event_name = #{req.eventName}, event_date = #{req.eventDate}, venue_id = #{req.venueId} WHERE event_id = #{eventId}
+    """)
+    Event updateEventById(Long eventId,@Param("req") EventRequest eventRequest);
 }

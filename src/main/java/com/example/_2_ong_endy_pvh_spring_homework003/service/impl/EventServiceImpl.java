@@ -44,4 +44,19 @@ public class EventServiceImpl implements EventService {
         }
         return eventRepository.getEventById(event.getEventId());
     }
+
+    @Override
+    public Event updateEventById(Long eventId, EventRequest eventRequest) {
+
+        if (eventRepository.getEventById(eventId) == null) {
+            return null;
+        }
+
+        eventRepository.updateEventById(eventId, eventRequest);
+        eventAttendeeRepository.deleteEventAttendeeByEventId(eventId);
+        for (Long AttendeeId : eventRequest.getAttendeeId()) {
+            eventAttendeeRepository.insertEventAttendee(AttendeeId, eventId);
+        }
+        return eventRepository.getEventById(eventId);
+    }
 }

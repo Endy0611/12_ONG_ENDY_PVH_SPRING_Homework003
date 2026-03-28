@@ -13,4 +13,6 @@ public interface EventService {
     Event deleteEventById(Long eventId);
 
     Event saveEvent(EventRequest eventRequest);
+
+    Event updateEventById(Long eventId, EventRequest eventRequest);
 }
