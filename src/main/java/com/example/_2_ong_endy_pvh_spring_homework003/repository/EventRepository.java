@@ -25,4 +25,10 @@ public interface EventRepository {
         SELECT * FROM events WHERE event_id = #{eventId} 
     """)
     Event getEventById(Long eventId);
+
+    @ResultMap("eventMapper")
+    @Select("""
+        DELETE FROM events WHERE event_id = #{eventId} RETURNING NULL
+    """)
+    Event deleteEventById(Long eventId);
 }

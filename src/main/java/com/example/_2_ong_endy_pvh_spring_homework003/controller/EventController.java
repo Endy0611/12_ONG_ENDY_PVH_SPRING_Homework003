@@ -31,10 +31,22 @@ public class EventController {
     public ResponseEntity<ApiResponse<Event>> getEventById(@PathVariable("event_id") Long eventId) {
         ApiResponse<Event> apiResponse = ApiResponse.<Event>builder()
                 .timestamp(Instant.now())
-                .message("Retrieved events successfully")
+                .message(String.format("Retrieved event with id %d successfully", eventId))
                 .status(HttpStatus.OK)
                 .payload(eventService.getEventById(eventId))
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{event_id}")
+    public ResponseEntity<ApiResponse<Event>> deleteEventById(@PathVariable("event_id") Long eventId) {
+        ApiResponse<Event> apiResponse = ApiResponse.<Event>builder()
+                .timestamp(Instant.now())
+                .message(String.format("Delete event with id %d successfully", eventId))
+                .status(HttpStatus.OK)
+                .payload(eventService.deleteEventById(eventId))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
 }

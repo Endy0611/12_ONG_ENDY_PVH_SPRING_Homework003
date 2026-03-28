@@ -25,4 +25,9 @@ public interface EventAttendeeRepository {
         INSERT INTO event_attendee VALUES (#{attendeeId}, #{eventId})
     """)
     void insertEventAttendee(Long attendeeId, Long eventId);
+
+    @Delete("""
+        DELETE FROM event_attendee WHERE event_id = #{eventId} RETURNING *
+    """)
+    void deleteEventAttendeeByEventId(Long eventId);
 }

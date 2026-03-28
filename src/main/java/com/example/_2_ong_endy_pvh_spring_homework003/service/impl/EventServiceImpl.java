@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
+import com.example._2_ong_endy_pvh_spring_homework003.repository.EventAttendeeRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.EventRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.service.EventService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
+    private final EventAttendeeRepository eventAttendeeRepository;
 
     @Override
     public List<Event> getAllEvents(int page, int size) {
@@ -22,5 +24,14 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event getEventById(Long eventId) {
         return eventRepository.getEventById(eventId);
+    }
+
+    @Override
+    public Event deleteEventById(Long eventId) {
+        if (eventRepository.getEventById(eventId) == null) {
+            return null;
+        }
+        eventAttendeeRepository.deleteEventAttendeeByEventId(eventId);
+        return eventRepository.deleteEventById(eventId);
     }
 }
