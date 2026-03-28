@@ -13,4 +13,6 @@ public interface AttendeeService {
     Attendee deleteAttendeeById(Long attendeeId);
 
     Attendee saveAttendee(AttendeeRequest attendeeRequest);
+
+    Attendee updateAttendeeById(Long attendeeId, AttendeeRequest attendeeRequest);
 }

@@ -63,4 +63,15 @@ public class AttendeeController {
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
+
+    @PutMapping("/{attendee_id}")
+    public ResponseEntity<ApiResponse<Attendee>> updateAttendeeById(@PathVariable("attendee_id") Long attendeeId, @RequestBody AttendeeRequest attendeeRequest) {
+        ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
+                .timestamp(Instant.now())
+                .message("Updated attendee with id 7 successfully")
+                .status(HttpStatus.OK)
+                .payload(attendeeService.updateAttendeeById(attendeeId ,attendeeRequest))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
 }

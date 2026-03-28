@@ -40,4 +40,11 @@ public interface AttendeeRepository {
         INSERT INTO attendees VALUES (default, #{req.attendeeName}, #{req.email}) RETURNING  *
     """)
     Attendee saveAttendee(@Param("req") AttendeeRequest attendeeRequest);
+
+
+    @ResultMap("attendeeMapper")
+    @Select("""
+        UPDATE attendees SET attendee_name = #{req.attendeeName}, email = #{req.email} WEHRE attendee = #{attendeeId}
+    """)
+    Attendee updateAttendeeById(Long attendeeId,@Param("req") AttendeeRequest attendeeRequest);
 }

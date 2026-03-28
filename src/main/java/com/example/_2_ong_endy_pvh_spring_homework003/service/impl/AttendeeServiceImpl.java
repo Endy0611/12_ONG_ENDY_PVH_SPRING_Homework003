@@ -35,4 +35,9 @@ public class AttendeeServiceImpl implements AttendeeService {
     public Attendee saveAttendee(AttendeeRequest attendeeRequest) {
         return attendeeRepository.saveAttendee(attendeeRequest);
     }
+
+    @Override
+    public Attendee updateAttendeeById(Long attendeeId, AttendeeRequest attendeeRequest) {
+        return attendeeRepository.updateAttendeeById(attendeeId, attendeeRequest);
+    }
 }
