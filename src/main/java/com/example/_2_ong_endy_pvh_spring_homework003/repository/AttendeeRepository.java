@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -32,4 +33,11 @@ public interface AttendeeRepository {
         DELETE FROM attendees WHERE attendee_id = #{attendeeId} RETURNING NULL
     """)
     Attendee deleteAttendeeById(Long attendeeId);
+
+
+    @ResultMap("attendeeMapper")
+    @Select("""
+        INSERT INTO attendees VALUES (default, #{req.attendeeName}, #{req.email}) RETURNING  *
+    """)
+    Attendee saveAttendee(@Param("req") AttendeeRequest attendeeRequest);
 }

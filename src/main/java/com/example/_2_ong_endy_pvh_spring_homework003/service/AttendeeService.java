@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
 
 import java.util.List;
 
@@ -10,4 +11,6 @@ public interface AttendeeService {
     Attendee getAttendeeById(Long attendeeId);
 
     Attendee deleteAttendeeById(Long attendeeId);
+
+    Attendee saveAttendee(AttendeeRequest attendeeRequest);
 }

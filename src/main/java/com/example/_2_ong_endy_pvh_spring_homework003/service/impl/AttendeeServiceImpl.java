@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.AttendeeRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.service.AttendeeService;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class AttendeeServiceImpl implements AttendeeService {
     @Override
     public Attendee deleteAttendeeById(Long attendeeId) {
         return attendeeRepository.deleteAttendeeById(attendeeId);
+    }
+
+    @Override
+    public Attendee saveAttendee(AttendeeRequest attendeeRequest) {
+        return attendeeRepository.saveAttendee(attendeeRequest);
     }
 }

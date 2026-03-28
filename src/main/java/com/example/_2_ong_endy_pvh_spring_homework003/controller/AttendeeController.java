@@ -1,6 +1,7 @@
 package com.example._2_ong_endy_pvh_spring_homework003.controller;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
+import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.AttendeeService;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.HTML;
 import java.time.Instant;
 import java.util.List;
 
@@ -49,5 +51,16 @@ public class AttendeeController {
                 .payload(attendeeService.deleteAttendeeById(attendeeId))
                 .build();
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ApiResponse<Attendee>> saveAttendee(@RequestBody AttendeeRequest attendeeRequest) {
+        ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
+                .timestamp(Instant.now())
+                .message("Created attendee successfully")
+                .status(HttpStatus.CREATED)
+                .payload(attendeeService.saveAttendee(attendeeRequest))
+                .build();
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 }
