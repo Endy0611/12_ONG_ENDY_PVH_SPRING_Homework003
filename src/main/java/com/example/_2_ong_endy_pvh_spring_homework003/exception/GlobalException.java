@@ -1,5 +1,6 @@
 package com.example._2_ong_endy_pvh_spring_homework003.exception;
 
+import jakarta.servlet.http.HttpServlet;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.validation.FieldError;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +19,7 @@ public class GlobalException {
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setType(URI.create("http://localhost:8080/errors/not-found"));
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }
@@ -34,6 +37,14 @@ public class GlobalException {
 
         // Add errors to ProblemDetail as extra properties
         problemDetail.setProperty("errors", errors);
+        return problemDetail;
+    }
+
+    @ExceptionHandler(DuplicateUserException.class)
+    public ProblemDetail handleDuplicateUser(DuplicateUserException e, HttpServlet request) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+        problemDetail.setTitle("Conflict");
+        problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }
 }

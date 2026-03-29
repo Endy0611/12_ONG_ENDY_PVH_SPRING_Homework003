@@ -1,5 +1,6 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
+import com.example._2_ong_endy_pvh_spring_homework003.exception.NotFoundException;
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.EventRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.EventAttendeeRepository;
@@ -30,9 +31,10 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event deleteEventById(Long eventId) {
         if (eventRepository.getEventById(eventId) == null) {
-            return null;
+            throw new NotFoundException("Event with ID " + eventId + " not found");
         }
         eventAttendeeRepository.deleteEventAttendeeByEventId(eventId);
+
         return eventRepository.deleteEventById(eventId);
     }
 

@@ -1,5 +1,6 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
+import com.example._2_ong_endy_pvh_spring_homework003.exception.NotFoundException;
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Venue;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
@@ -30,7 +31,11 @@ public class VenueServiceImpl implements VenueService {
 
     @Override
     public Venue deleteVenueById(Long venueId) {
-        return venueRepository.deleteVenueById(venueId);
+        Venue venue = venueRepository.deleteVenueById(venueId);
+        if (venue == null ) {
+            throw new NotFoundException("Venue with id " + venueId + " not found");
+        }
+        return venue;
     }
 
     @Override
