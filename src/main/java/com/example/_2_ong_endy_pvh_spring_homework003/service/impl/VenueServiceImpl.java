@@ -4,11 +4,9 @@ import com.example._2_ong_endy_pvh_spring_homework003.exception.DuplicateUserExc
 import com.example._2_ong_endy_pvh_spring_homework003.exception.NotFoundException;
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Venue;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest;
-import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.repository.VenueRepository;
 import com.example._2_ong_endy_pvh_spring_homework003.service.VenueService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

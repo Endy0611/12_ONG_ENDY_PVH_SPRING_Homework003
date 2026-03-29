@@ -36,7 +36,7 @@ public interface EventRepository {
 
     @ResultMap("eventMapper")
     @Select("""
-        INSERT INTO events VALUES (default, #{req.eventName}, #{req.eventDate}, #{req.venueId}) RETURNING * 
+        INSERT INTO events VALUES (default, #{req.eventName}, #{req.eventDate}, #{req.venueId}) RETURNING *
     """)
     Event saveEvent(@Param("req") EventRequest eventRequest);
 
