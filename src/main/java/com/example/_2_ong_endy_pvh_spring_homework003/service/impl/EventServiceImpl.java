@@ -25,6 +25,9 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event getEventById(Long eventId) {
+        if (eventRepository.getEventById(eventId) == null) {
+            throw new NotFoundException("Event with ID " + eventId + " not found");
+        }
         return eventRepository.getEventById(eventId);
     }
 

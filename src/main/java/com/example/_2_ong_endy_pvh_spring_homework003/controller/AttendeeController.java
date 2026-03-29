@@ -37,7 +37,7 @@ public class AttendeeController {
     public ResponseEntity<ApiResponse<Attendee>> getAttendeeById(@PathVariable("attendee_id") Long attendeeId) {
         ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
                 .timestamp(Instant.now())
-                .message(String.format("Retrieved attendee with id #d successfully", attendeeId))
+                .message(String.format("Retrieved attendee with id %d successfully", attendeeId))
                 .status(HttpStatus.OK)
                 .payload(attendeeService.getAttendeeById(attendeeId))
                 .build();
