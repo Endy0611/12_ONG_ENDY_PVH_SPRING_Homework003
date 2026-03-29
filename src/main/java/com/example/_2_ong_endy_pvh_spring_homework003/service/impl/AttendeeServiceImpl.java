@@ -1,5 +1,6 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
+import com.example._2_ong_endy_pvh_spring_homework003.exception.NotFoundException;
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Attendee;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeUpdateRequest;
@@ -24,7 +25,12 @@ public class AttendeeServiceImpl implements AttendeeService {
 
     @Override
     public Attendee getAttendeeById(Long attendeeId) {
-        return attendeeRepository.getAttendeeById(attendeeId);
+        Attendee attendee = attendeeRepository.getAttendeeById(attendeeId);
+
+        if (attendee == null ) {
+            throw new NotFoundException();
+        }
+        return attendee;
     }
 
     @Override
