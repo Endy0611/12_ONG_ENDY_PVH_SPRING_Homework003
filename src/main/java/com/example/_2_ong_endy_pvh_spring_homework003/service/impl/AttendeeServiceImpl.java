@@ -29,18 +29,18 @@ public class AttendeeServiceImpl implements AttendeeService {
         Attendee attendee = attendeeRepository.getAttendeeById(attendeeId);
 
         if (attendee == null ) {
-            throw new NotFoundException();
+            throw new NotFoundException("Attendee with id " + attendeeId + " not found");
         }
         return attendee;
     }
 
     @Override
     public Attendee deleteAttendeeById(Long attendeeId) {
-        Attendee attendee = attendeeRepository.deleteAttendeeById(attendeeId);
+        Attendee attendee = attendeeRepository.getAttendeeById(attendeeId);
         if (attendee == null ) {
             throw new NotFoundException("Attendee with id " + attendeeId + " not found");
         }
-        return attendee;
+        return attendeeRepository.deleteAttendeeById(attendeeId);
     }
 
     @Override

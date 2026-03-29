@@ -28,7 +28,7 @@ public interface VenueRepository {
 
     @ResultMap("venueMapper")
     @Select("""
-        DELETE FROM venues WHERE venue_id = #{venueId} RETURNING null
+        DELETE FROM venues WHERE venue_id = #{venueId} RETURNING NULL
     """)
     Venue deleteVenueById(Long venueId);
 
