@@ -5,6 +5,7 @@ import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeRequ
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.AttendeeUpdateRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.AttendeeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class AttendeeController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Attendee>> saveAttendee(@RequestBody AttendeeRequest attendeeRequest) {
+    public ResponseEntity<ApiResponse<Attendee>> saveAttendee(@RequestBody @Valid AttendeeRequest attendeeRequest) {
         ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
                 .timestamp(Instant.now())
                 .message("Created attendee successfully")
