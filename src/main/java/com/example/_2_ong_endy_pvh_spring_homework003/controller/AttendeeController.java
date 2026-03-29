@@ -70,7 +70,7 @@ public class AttendeeController {
     public ResponseEntity<ApiResponse<Attendee>> updateAttendeeById(@PathVariable("attendee_id") Long attendeeId, @RequestBody AttendeeUpdateRequest attendeeUpdateRequest) {
         ApiResponse<Attendee> apiResponse = ApiResponse.<Attendee>builder()
                 .timestamp(Instant.now())
-                .message("Updated attendee with id 7 successfully")
+                .message((String.format("Updated attendee with id %d successfully", attendeeId)))
                 .status(HttpStatus.OK)
                 .payload(attendeeService.updateAttendeeById(attendeeId ,attendeeUpdateRequest))
                 .build();

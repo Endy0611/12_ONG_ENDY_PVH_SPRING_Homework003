@@ -4,6 +4,7 @@ import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Venue;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest;
 import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import com.example._2_ong_endy_pvh_spring_homework003.service.VenueService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +51,7 @@ public class VenueController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Venue>> saveVenue(@RequestBody VenueRequest venueRequest) {
+    public ResponseEntity<ApiResponse<Venue>> saveVenue(@RequestBody @Valid VenueRequest venueRequest) {
         ApiResponse<Venue> apiResponse = ApiResponse.<Venue>builder()
                 .timestamp(Instant.now())
                 .message("Created venue successfull")
@@ -61,7 +62,7 @@ public class VenueController {
     }
 
     @PutMapping("/{venue_id}")
-    public ResponseEntity<ApiResponse<Venue>> updateVenueById(@PathVariable("venue_id") Long venueId, @RequestBody VenueRequest venueRequest) {
+    public ResponseEntity<ApiResponse<Venue>> updateVenueById(@PathVariable("venue_id") @Valid Long venueId, @RequestBody VenueRequest venueRequest) {
         ApiResponse<Venue> apiResponse = ApiResponse.<Venue>builder()
                 .timestamp(Instant.now())
                 .message(String.format("Retrieved venue with id %d successfully", venueId))

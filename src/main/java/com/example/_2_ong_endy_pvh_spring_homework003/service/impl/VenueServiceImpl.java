@@ -1,5 +1,6 @@
 package com.example._2_ong_endy_pvh_spring_homework003.service.impl;
 
+import com.example._2_ong_endy_pvh_spring_homework003.exception.DuplicateUserException;
 import com.example._2_ong_endy_pvh_spring_homework003.exception.NotFoundException;
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Venue;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest;
@@ -44,11 +45,21 @@ public class VenueServiceImpl implements VenueService {
 
     @Override
     public Venue saveVenue(VenueRequest venueRequest) {
+        if (venueRepository.existsByAttendeeName(venueRequest.getVenueName())) {
+            throw new DuplicateUserException("Attendee name already exists");
+        }
         return venueRepository.saveVenue(venueRequest);
     }
 
     @Override
     public Venue updateVenueById(Long venueId, VenueRequest venueRequest) {
+        Venue venue = venueRepository.getVenueById(venueId);
+        if (venue == null ) {
+            throw new NotFoundException("Venue with id " + venueId + " not found");
+        }
+        if (venueRepository.existsByAttendeeName(venueRequest.getVenueName())) {
+            throw new DuplicateUserException("Attendee name already exists");
+        }
         return venueRepository.updateVenueById(venueId,venueRequest);
     }
 }

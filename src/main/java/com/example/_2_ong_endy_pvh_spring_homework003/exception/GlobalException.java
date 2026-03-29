@@ -19,7 +19,7 @@ public class GlobalException {
     @ExceptionHandler(NotFoundException.class)
     public ProblemDetail handleNotFoundException(NotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
-        problemDetail.setType(URI.create("http://localhost:8080/errors/not-found"));
+        problemDetail.setType(URI.create("http://localhost:8090/errors/not-found"));
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }
@@ -41,9 +41,10 @@ public class GlobalException {
     }
 
     @ExceptionHandler(DuplicateUserException.class)
-    public ProblemDetail handleDuplicateUser(DuplicateUserException e, HttpServlet request) {
+    public ProblemDetail handleDuplicateUser(DuplicateUserException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
         problemDetail.setTitle("Conflict");
+        problemDetail.setType(URI.create("http://localhost:8090/errors/duplicate-user"));
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }

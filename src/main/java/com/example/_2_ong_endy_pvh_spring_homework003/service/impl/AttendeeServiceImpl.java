@@ -45,11 +45,25 @@ public class AttendeeServiceImpl implements AttendeeService {
 
     @Override
     public Attendee saveAttendee(AttendeeRequest attendeeRequest) {
+        if (attendeeRepository.existsByAttendeeName(attendeeRequest.getAttendeeName())) {
+            throw new DuplicateUserException("Attendee name already exists");
+        }
+        if (attendeeRepository.existsByAttendeeEmail(attendeeRequest.getEmail())) {
+            throw new DuplicateUserException("Attendee email already exists");
+        }
         return attendeeRepository.saveAttendee(attendeeRequest);
     }
 
     @Override
     public Attendee updateAttendeeById(Long attendeeId, AttendeeUpdateRequest attendeeUpdateRequest) {
+        Attendee attendee = attendeeRepository.getAttendeeById(attendeeId);
+        if (attendee == null) {
+            throw new NotFoundException("Attendee with id " + attendeeId + " not found");
+        }
+        if (attendeeRepository.existsByAttendeeName(attendeeUpdateRequest.getAttendeeName())){
+            throw new DuplicateUserException("Attendee name already exists");
+        }
+
         return attendeeRepository.updateAttendeeById(attendeeId, attendeeUpdateRequest);
     }
 }
