@@ -51,8 +51,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Event saveEvent(EventRequest eventRequest) {
-        if (eventRepository.existsByAttendeeName(eventRequest.getEventName())) {
-            throw new DuplicateUserException("Attendee name already exists");
+        if (eventRepository.existsByEventName(eventRequest.getEventName())) {
+            throw new DuplicateUserException("Event name already exists");
         }
 
         if (eventRequest.getEventDate().isBefore(LocalDate.now())){
@@ -79,8 +79,8 @@ public class EventServiceImpl implements EventService {
     @Override
     public Event updateEventById(Long eventId, EventRequest eventRequest) {
 
-        if (eventRepository.existsByAttendeeName(eventRequest.getEventName())) {
-            throw new DuplicateUserException("Attendee name already exists");
+        if (eventRepository.existsByEventName(eventRequest.getEventName())) {
+            throw new DuplicateUserException("Event name already exists");
         }
 
         if (eventRequest.getEventDate().isBefore(LocalDate.now())){

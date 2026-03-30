@@ -50,5 +50,5 @@ public interface VenueRepository {
     @Select("""
            SELECT EXISTS(SELECT 1 FROM venues WHERE venue_name = #{venueName})
     """)
-    boolean existsByAttendeeName(@NotNull @NotBlank(message = "Venue name cannot be blank") @Size(min = 1, max = 100, message = "Venue name must not exceed 100 characters") String venueName);
+    boolean existsByVenueName(@NotNull @NotBlank(message = "Venue name cannot be blank") @Size(min = 1, max = 100, message = "Venue name must not exceed 100 characters") String venueName);
 }

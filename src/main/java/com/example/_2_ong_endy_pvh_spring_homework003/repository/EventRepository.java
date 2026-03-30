@@ -52,5 +52,5 @@ public interface EventRepository {
     @Select("""
            SELECT EXISTS(SELECT 1 FROM events WHERE event_name = #{eventName})
     """)
-    boolean existsByAttendeeName(@NotBlank(message = "Event name cannot be blank") String eventName);
+    boolean existsByEventName(@NotBlank(message = "Event name cannot be blank") String eventName);
 }
