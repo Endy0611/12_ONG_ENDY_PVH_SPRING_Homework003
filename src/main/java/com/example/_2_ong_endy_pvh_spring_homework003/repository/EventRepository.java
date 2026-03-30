@@ -2,6 +2,7 @@ package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Event;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.EventRequest;
+import jakarta.validation.constraints.NotBlank;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -46,4 +47,10 @@ public interface EventRepository {
         UPDATE events SET event_name = #{req.eventName}, event_date = #{req.eventDate}, venue_id = #{req.venueId} WHERE event_id = #{eventId}
     """)
     Event updateEventById(Long eventId,@Param("req") EventRequest eventRequest);
+
+
+    @Select("""
+           SELECT EXISTS(SELECT 1 FROM events WHERE event_name = #{eventName})
+    """)
+    boolean existsByAttendeeName(@NotBlank(message = "Event name cannot be blank") String eventName);
 }

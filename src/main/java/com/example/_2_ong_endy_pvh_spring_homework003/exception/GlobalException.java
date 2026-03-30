@@ -48,4 +48,15 @@ public class GlobalException {
         problemDetail.setProperty("timestamp", Instant.now());
         return problemDetail;
     }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ProblemDetail handleBadRequestException(BadRequestException b) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        Map<String, String> errors = new HashMap<>();
+        errors.put("eventDate", b.getMessage());
+        problemDetail.setTitle("Bad Request");
+        problemDetail.setProperty("errors", errors);
+        problemDetail.setProperty("timestamp", Instant.now());
+        return problemDetail;
+    }
 }

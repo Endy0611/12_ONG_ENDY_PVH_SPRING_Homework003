@@ -18,8 +18,7 @@ public class EventRequest {
     private String eventName;
 
     @NotNull(message = "Event date is required")
-    @Future(message = "Event date must be in the future")
-    @JsonFormat(pattern = "yyyy-MM-dd")
+//    @NotBlank
     private LocalDate eventDate;
 
     @NotNull
@@ -27,7 +26,6 @@ public class EventRequest {
     @Positive(message = "Venue ID must be positive number")
     private Long venueId;
 
-    @NotBlank
     @NotNull
     @NotEmpty(message = "Attendee list cannot be empty")
     private List<Long> attendeeId;
