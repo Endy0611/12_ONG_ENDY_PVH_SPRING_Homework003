@@ -2,12 +2,10 @@ package com.example._2_ong_endy_pvh_spring_homework003.repository;
 
 import com.example._2_ong_endy_pvh_spring_homework003.model.entity.Venue;
 import com.example._2_ong_endy_pvh_spring_homework003.model.request.VenueRequest;
-import com.example._2_ong_endy_pvh_spring_homework003.model.response.ApiResponse;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.apache.ibatis.annotations.*;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 @Mapper
